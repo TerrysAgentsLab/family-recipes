@@ -17,13 +17,14 @@ const TAGLINES = {
 export default function GreetingBanner({ user, partyName, mealSlot, dateText }) {
   const greeting = GREETINGS[mealSlot.currentMealSlot.key] || 'Hallo';
   const tagline = TAGLINES[mealSlot.currentMealSlot.key] || '';
-  const displayName = user ? user.display_name : partyName || '';
+  const displayName = partyName || (user ? user.display_name : '');
 
   return (
     <section className="greeting-banner">
       <div>
         <h2 className="greeting-text">{greeting}{displayName ? `, ${displayName}` : ''}!</h2>
         <p className="greeting-tagline">{tagline}</p>
+        {partyName ? <p className="greeting-area">Bereich: {partyName}</p> : null}
         <p className="greeting-date">{dateText}</p>
       </div>
     </section>

@@ -1,20 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-
-export default function Topbar({ user, logout, dateText, timeText, onNewRecipe, onLogin, onBackToParties, onMyRecipes, partyName }) {
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-  const profileMenuRef = useRef(null);
-
-  useEffect(() => {
-    function onPointerDown(event) {
-      if (!profileMenuRef.current) return;
-      if (!profileMenuRef.current.contains(event.target)) {
-        setProfileMenuOpen(false);
-      }
-    }
-    window.addEventListener('pointerdown', onPointerDown);
-    return () => window.removeEventListener('pointerdown', onPointerDown);
-  }, []);
-
+export default function Topbar({ user, logout, dateText, timeText, onNewRecipe, onLogin, onBackToParties, onPartyRecipes, partyName }) {
   return (
     <header className="topbar">
       <div className="topbar-main">
@@ -30,27 +14,14 @@ export default function Topbar({ user, logout, dateText, timeText, onNewRecipe, 
       <div className="topbar-side">
         {user ? (
           <>
-            <div className="profile-menu" ref={profileMenuRef}>
-              <button
-                className="secondary-btn profile-btn"
-                type="button"
-                onClick={() => setProfileMenuOpen((open) => !open)}
-              >
-                {user.display_name}
-              </button>
-              {profileMenuOpen ? (
-                <div className="profile-dropdown">
-                  <button type="button" className="dropdown-item" onClick={() => { onMyRecipes(); setProfileMenuOpen(false); }}>
-                    Meine Rezepte
-                  </button>
-                  <button type="button" className="dropdown-item" onClick={() => { logout(); setProfileMenuOpen(false); }}>
-                    Logout
-                  </button>
-                </div>
-              ) : null}
-            </div>
+            <button className="secondary-btn profile-btn" type="button" onClick={onPartyRecipes}>
+              Rezeptverwaltung
+            </button>
             <button className="primary-btn" type="button" onClick={onNewRecipe}>
               Neues Rezept
+            </button>
+            <button className="secondary-btn" type="button" onClick={logout}>
+              Logout
             </button>
           </>
         ) : (

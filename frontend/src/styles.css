@@ -125,6 +125,13 @@ body {
   text-transform: capitalize;
 }
 
+.greeting-area {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f766e;
+}
+
 /* ===== Dashboard Sections ===== */
 .dashboard-section {
   display: grid;
@@ -279,53 +286,9 @@ body {
   font-size: 0.9rem;
 }
 
-/* ===== Profile Menu ===== */
-.profile-menu {
-  position: relative;
-}
-
 .profile-btn {
-  min-width: 120px;
-  text-align: center;
-  font-weight: 700;
-}
-
-.profile-dropdown {
-  position: absolute;
-  top: calc(100% + 0.35rem);
-  right: 0;
-  min-width: 170px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  background: #fff;
-  box-shadow: 0 10px 22px rgba(17, 24, 39, 0.12);
-  overflow: hidden;
-  z-index: 20;
-}
-
-.dropdown-item {
-  width: 100%;
-  border: 0;
-  border-bottom: 1px solid #e5e7eb;
-  background: #fff;
   text-align: left;
-  padding: 0.55rem 0.75rem;
-  font: inherit;
-  cursor: pointer;
-  transition: background 0.1s ease;
-}
-
-.dropdown-item:hover:not(:disabled) {
-  background: #f9fafb;
-}
-
-.dropdown-item:last-child {
-  border-bottom: 0;
-}
-
-.dropdown-item:disabled {
-  color: #9ca3af;
-  cursor: not-allowed;
+  font-weight: 700;
 }
 
 /* ===== Notes ===== */
@@ -846,43 +809,66 @@ body {
 /* ===== Party Picker ===== */
 .party-picker {
   display: grid;
-  gap: 1.2rem;
-  padding: 1rem 0;
+  gap: 1rem;
+  padding: 0.5rem 0 1rem;
 }
 
-.party-picker-header {
+.party-hero {
+  position: relative;
+  overflow: hidden;
   text-align: center;
+  padding: 1.4rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #f1d4a4;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 243, 200, 0.9) 0%, rgba(255, 243, 200, 0) 45%),
+    radial-gradient(circle at 86% 14%, rgba(191, 219, 254, 0.8) 0%, rgba(191, 219, 254, 0) 45%),
+    linear-gradient(135deg, #fff6df 0%, #ffe8c8 100%);
 }
 
-.party-picker-header h2 {
+.party-hero-kicker {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #5b4630;
+}
+
+.party-hero h2 {
+  margin: 0;
+  font-size: 1.55rem;
+  line-height: 1.2;
+  padding-top: 0.3rem;
   color: #0c4a6e;
 }
 
-.party-picker-header p {
-  margin: 0.4rem 0 0;
+.party-hero p {
+  margin: 0.5rem 0 0;
   color: #4b5563;
 }
 
 .party-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.75rem;
-  max-width: 800px;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+  max-width: 960px;
   margin: 0 auto;
   width: 100%;
 }
 
 .party-card {
-  border: 2px solid #e5e7eb;
-  border-radius: 16px;
+  position: relative;
+  border: 1px solid #dbe2ea;
+  border-radius: 18px;
   background: #fff;
-  padding: 1.2rem 1rem;
+  padding: 1.2rem 1rem 1.1rem;
+  min-height: 170px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   box-shadow: 0 4px 12px rgba(17, 24, 39, 0.05);
@@ -895,15 +881,43 @@ body {
   border-color: #005f73;
 }
 
-.party-card-name {
-  font-size: 1.15rem;
+.party-card-badge {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #0f766e;
+  background: #ecfeff;
+  border: 1px solid #99f6e4;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+}
+
+.party-card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  font-weight: 800;
+  color: #0c4a6e;
+  background: linear-gradient(135deg, #dbeafe 0%, #fef3c7 100%);
+  border: 1px solid #bfdbfe;
+}
+
+.party-card-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 0.25rem;
 }
 
 .party-card-count {
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.9rem;
+  color: #64748b;
 }
 
 /* ===== My Recipes ===== */
@@ -1012,6 +1026,10 @@ body {
 
 /* ===== Responsive ===== */
 @media (min-width: 600px) {
+  .party-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .recipe-row {
     flex-wrap: wrap;
   }
@@ -1037,6 +1055,10 @@ body {
 
   .content {
     grid-column: 1 / 2;
+  }
+
+  .party-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .idea-grid {

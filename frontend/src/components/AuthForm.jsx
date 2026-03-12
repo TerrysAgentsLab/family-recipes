@@ -1,4 +1,13 @@
 export default function AuthForm({ authMode, setAuthMode, authForm, authError, onAuthInput, onAuthSubmit, isModal, onClose, onSuccess }) {
+  const PARTY_OPTIONS = [
+    'Toni & Gudrun',
+    'Gabi & Thomas',
+    'Terry',
+    'CT & Petra',
+    'Toto & Maren',
+    'Steffi & Dirk',
+  ];
+
   async function handleSubmit(e) {
     e.preventDefault();
     const success = await onAuthSubmit(e);
@@ -11,7 +20,12 @@ export default function AuthForm({ authMode, setAuthMode, authForm, authError, o
       <form onSubmit={handleSubmit} className="form-grid">
         {authMode === 'register' ? (
           <>
-            <input name="party_name" value={authForm.party_name} onChange={onAuthInput} placeholder="Partei/Familie" />
+            <select name="party_name" value={authForm.party_name} onChange={onAuthInput} required>
+              <option value="">Familie wählen</option>
+              {PARTY_OPTIONS.map((partyName) => (
+                <option key={partyName} value={partyName}>{partyName}</option>
+              ))}
+            </select>
             <input name="display_name" value={authForm.display_name} onChange={onAuthInput} placeholder="Anzeigename" />
           </>
         ) : null}
